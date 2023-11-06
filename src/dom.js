@@ -10,6 +10,15 @@ let input = document.getElementById("input-box");
 let button = document.getElementById("submit-button");
 let showContainer = document.getElementById("show-container");
 let autocomleteContainer = document.querySelector(".autocomplete");
+let loaderSpinner = document.querySelector('loader')
+
+function showLoader() {
+    loaderSpinner.style.display = 'block';
+}
+
+function hideLoader() {
+ loaderSpinner.style.display = 'none';
+}
 
 async function fetchData(queryType, queryValue) {
     let url;
@@ -18,8 +27,10 @@ async function fetchData(queryType, queryValue) {
     } else if (queryType === 'character') {
         url = `https://gateway.marvel.com:443/v1/public/characters?ts=${timestamp}&apikey=${publicKey}&hash=${hashValue}&name=${queryValue}`;
     }
+    showLoader();
     try {
         const res = await fetch(url);
+        hideLoader();
         if (!res.ok) {
             throw new Error(`Error! Status: ${res.status}`);
         }
@@ -28,6 +39,7 @@ async function fetchData(queryType, queryValue) {
 
     } catch (error) {
         console.error('There was a problem with fetch data:', error.message);
+        hideLoader();
     }
 }
 
@@ -102,8 +114,18 @@ function displayCharacter(characters) {
 
 function attachEventListenersToLinks() {
     document.querySelectorAll('.tabs__link').forEach(link => {
-        link.addEventListener('click', function() {
-            console.log('click'); 
+        link.addEventListener('click', function(event) {
+            event.preventDefault(); 
+
+            document.querySelectorAll('.tabs__li').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            const parentTab = this.parentElement;
+            if (parentTab) {
+                parentTab.classList.add('active');
+            }
+
             const characterId = this.getAttribute('data-character-id');
             const contentType = this.getAttribute('data-content-type');
             showTabsContent(characterId, contentType);
@@ -111,18 +133,30 @@ function attachEventListenersToLinks() {
     });
 }
 
+
 async function handleButtonClick(searchQuery) {
-    const data = await fetchData('character', searchQuery);
-    // Fetch the specific character based on the provided name or default to 'Iron Man'
-    //const data = await fetchData('character', characterName, input.value); 
-
-    // Fetch the specific character based on input value
-    //const data = await fetchData('character', input.value); 
-
+    showLoader();
+    const data = await fetchData('character', searchQuery); 
     showContainer.innerHTML = '';
-    showTabsContent.innerHTML = '';
+    const showTabsContent = document.getElementById('comics-container');
+    if (showTabsContent) {
+        showTabsContent.innerHTML = '';
+    }
+    
+    resetTabsToDefaultState();
+    hideLoader();
     displayCharacter(data);
     removeElements(); 
+
+}
+
+function resetTabsToDefaultState() {
+    const tabs = document.querySelectorAll('.tabs__li');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    const overviewTab = tabs[0];
+    if (overviewTab) {
+        overviewTab.classList.add('active');
+    }
 }
 
 button.addEventListener('click', () => {
@@ -182,7 +216,7 @@ async function fetchContentByCharacterId(characterId, contentType) {
     
     const showTabsContent = document.getElementById('comics-container')
       showTabsContent.innerHTML = htmlString;
-      console.log(showTabsContent)
+    
   }
 
   window.onload = () => {
