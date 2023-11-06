@@ -10,7 +10,7 @@ let input = document.getElementById("input-box");
 let button = document.getElementById("submit-button");
 let showContainer = document.getElementById("show-container");
 let autocomleteContainer = document.querySelector(".autocomplete");
-let loaderSpinner = document.querySelector('loader')
+let loaderSpinner = document.querySelector('.loader')
 
 function showLoader() {
     loaderSpinner.style.display = 'block';
