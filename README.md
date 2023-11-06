@@ -33,9 +33,9 @@ To use the application, simply enter the name of a Marvel character into the sea
 
 ## Built With
 
-- HTML - The markup language used
-- CSS - The style sheet language used
-- JavaScript - The programming language used
+- HTML 
+- CSS 
+- JavaScript 
 
 
 ## License
