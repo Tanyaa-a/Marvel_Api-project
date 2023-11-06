@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel API Project</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navigation">
+            <a href="#" class="logo">Marvel Project</a>
+        </nav>
+    </header>
+    <main>
+        <div class="wrapper">
+            <div class="search-bar">
+                <input type="text" id="input-box" class="input" value="iron man"
+                    placeholder="Type character name..">
+                <button id="submit-button">Search</button>
+            </div>
+            <div class="autocomplete"></div>
+            <div class="container">
+                <div class="display-container" id="show-container"></div>
+                <div class="comics-container" id="comics-container"></div>
+            </div>
+        </div>
+        <div id="container" class="content">
+            <div class="loader"><img src="./gif/loader.gif" alt="load spinner"/></div>
+        </div>
+    </main>
+    <footer class="page-footer">
+        <div class="copyright">
+            <ul>
+                <li>
+                    <p class="copyright-year">2023</p>
+                </li>
+                <li>
+                    <p>Marvel Project</p>
+                </li>
+                <li>
+                    <a class="copyright-info github" href="https://github.com/Tanyaa-a">Tanya A</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.js"></script>
+    <script type="module" src="./src/dom.js"></script>
+</body>
+</html>
