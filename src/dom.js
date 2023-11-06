@@ -48,7 +48,6 @@ input.addEventListener("keyup", async () => {
     }
 
     const characters = await fetchData('autocomplete', input.value);
-
     characters.forEach((result) => {
         let name = result.name;
         let div = document.createElement("div");
@@ -67,11 +66,8 @@ input.addEventListener("keyup", async () => {
 function displayCharacter(characters) {
     let htmlString = "";
    
-
     characters.forEach(character => {
-
         htmlString += `
-    
         <div class="card-container">
             <div class="container-character-image">  
                 <img src="${character.thumbnail.path}.${character.thumbnail.extension}" alt="${character.name}">
@@ -115,19 +111,23 @@ function attachEventListenersToLinks() {
     });
 }
 
-async function handleButtonClick() {
+async function handleButtonClick(searchQuery) {
+    const data = await fetchData('character', searchQuery);
+    // Fetch the specific character based on the provided name or default to 'Iron Man'
+    //const data = await fetchData('character', characterName, input.value); 
 
     // Fetch the specific character based on input value
-    const data = await fetchData('character', input.value); 
+    //const data = await fetchData('character', input.value); 
 
     showContainer.innerHTML = '';
     showTabsContent.innerHTML = '';
     displayCharacter(data);
-    console.log(data)
     removeElements(); 
 }
 
-button.addEventListener('click', handleButtonClick);
+button.addEventListener('click', () => {
+    handleButtonClick(input.value)
+} )
 
 async function fetchContentByCharacterId(characterId, contentType) {
     let endpoint = '';
@@ -156,7 +156,6 @@ async function fetchContentByCharacterId(characterId, contentType) {
         throw new Error(`Error! Status: ${res.status}`);
       }
         const data = await res.json();
-        console.log(data)
       return data.data.results;
     } catch (error) {
       console.error('There was a problem with fetch data:', error.message);
@@ -187,8 +186,7 @@ async function fetchContentByCharacterId(characterId, contentType) {
   }
 
   window.onload = () => {
-    handleButtonClick();
-         console.log(displayCharacter)
+    handleButtonClick('Iron Man');
  };
     
 
