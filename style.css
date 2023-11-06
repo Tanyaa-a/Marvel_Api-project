@@ -6,14 +6,16 @@ p {
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #282828;
     font-weight: 300;
     color: #444;
     line-height: 1.9;
-
-
 }
 
 .navigation {
@@ -159,8 +161,8 @@ h3 {
   background-color: #282828;
   box-shadow: 6px 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px; 
-  order:1;
-  transition: transform 0.3s ease; 
+  order:2;
+  
 }
 @media (max-width: 800px) {
   .card-container {
@@ -169,7 +171,6 @@ h3 {
 }
 
 .card-container:hover {
-  transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 .container-character-description {
@@ -178,6 +179,12 @@ h3 {
   justify-content: center;
   text-align: center;
   max-width: 500px;
+}
+@media (max-width:800px) {
+  .container-character-description{
+    align-content: center;
+    margin: auto;
+  }
 }
 .container-character-image img {
   display: flex;
@@ -190,14 +197,13 @@ h3 {
   
   @media (max-width: 800px) {
     max-width: 100%;
-    height: 200px;
-    width: 200px;
+    height: 300px;
+    width: 300px;
     align-content: center;
     margin-top:15px;
  
   }
 }
-
 
 .container-character-image {
   display: flex;
@@ -250,12 +256,12 @@ h3 {
 .tabs {
   position: absolute;
   z-index: 30;
-  top: 400px;
+  top: 410px;
   right: 350px;
 }
  @media (max-width: 800px) {
  .tabs {
-  top: 250px;
+  top: 360px;
   right: 350px;
   }
 }
@@ -274,7 +280,7 @@ h3 {
 }
 
 .tabs__li {
-  padding: 9px;
+  padding: 0 7px;
   display: flex;
   color: white;
   border-right: 1px solid #393939;
@@ -293,17 +299,22 @@ h3 {
   color: #f00;
 }
 
+.tabs__link:active {
+  color: #f00;
+}
 .tab-content {
   display: none;
 }
 
 footer {
-  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   background-color: #e62429;
 }
+
+
+
 
 .copyright > ul {
   display: flex;
@@ -317,8 +328,18 @@ footer {
   letter-spacing: 2px;
   list-style-type: none;
   padding: 20px;
-
   margin: 0 auto;
+}
+@media (max-width: 800px) {
+  .copyright > ul {
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
+    padding: 20px 0;
+    margin: 0 auto; 
+    text-align: center; 
+  }
 }
 
 .loader {
@@ -342,14 +363,14 @@ footer {
   flex-direction: raw;
   justify-content: center;
   gap: 10px;
-  width: 800px;
-  margin: -40px auto;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+margin-top: -15px;
   position: relative;
   order:3;
   align-content: center;
   background-color:rgb(68, 60, 60) ;
-  /* border: rgb(68, 60, 60) 10px solid; */
-  
 }
 @media (max-width: 800px) {
   #comics-container {
@@ -357,21 +378,33 @@ footer {
     justify-content: center;
     align-items: center;
    
+    background-color: #282828;
+   margin: 20px auto;
+   max-width: 300px;
+   
    }
   }
 
 .content-item {
- 
-  /* padding: 10px; 
-   margin: 10px; */
   width: 250px;
   text-align: center;
+}
+@media (max-width: 800px) {
+  .content-item {
+    width: 250px;
+  }
 }
 
 .comic-image {
   width: 100%;
-  height: 190px;
- 
+  height: 215px;
+  padding-top: 10px;
+}
+@media(max-width:800px) {
+  .comic-image {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .comic-title {
